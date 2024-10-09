@@ -7,9 +7,9 @@ namespace RestVsGraphQL.Controllers
 	[ApiController]
 	public class PostsController : ControllerBase
 	{
-		private readonly PostData _data;
+		private readonly PostDataService _data;
 
-		public PostsController(PostData data)
+		public PostsController(PostDataService data)
 		{
 			_data = data;
 		}
