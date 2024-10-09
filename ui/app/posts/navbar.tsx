@@ -7,9 +7,9 @@ const Navbar: React.FC = () => {
     <div className="flex gap-x-5 py-5 border-b-2 border-black">
       <CustomLink href="/">Home</CustomLink>
       <CustomLink href="/posts/graphql">GraphQL Posts</CustomLink>
-      <CustomLink href="/posts/graphql">Add GraphQL Posts</CustomLink>
+      <CustomLink href="/posts/graphql/add">Add GraphQL Posts</CustomLink>
+      <CustomLink href="/posts/graphql/subscribe">GraphQL Subscribe</CustomLink>
       <CustomLink href="/posts/rest">Rest Posts</CustomLink>
-      <CustomLink href="/posts/rest/add">Add Rest Posts</CustomLink>
     </div>
   );
 };
