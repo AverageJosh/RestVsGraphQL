@@ -1,58 +1,53 @@
 "use client";
 
 import React from "react";
-import { useSubscription, gql } from "@apollo/client";
 import Navbar from "../../navbar";
 
-interface GetPostsData {
-  onAdd: {
-    id: string;
-    title: string;
-    author: {
-      name: string;
-    };
-  };
-}
-
-const SUBSCRIBE_POSTS = gql`
-  subscription SubscribePosts {
-  onAdd {
-    title 
-    author {
-      name
-    }
-  }
-`;
+// const MESSAGE_SUBSCRIPTION = gql`
+//   subscription OnMessageReceived {
+//     onMessageReceived
+//   }
+// `;
 
 const Page: React.FC = () => {
-  const { loading, error, data } = useSubscription<GetPostsData>(
-    SUBSCRIBE_POSTS,
-    {
-      onData: (options) => {
-        console.log(options.data);
-      },
-    }
-  );
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error {error.message}</p>;
-
   return (
     <div className="flex flex-col">
       <Navbar />
       <div className="p-5">
         <h1 className="mb-5">Subscribed Posts</h1>
-        {data && (
-          <div className="flex flex-col">
-            <div className="mb-2 border-b border-dashed w-96">
-              <h3 className="">{data.onAdd.title}</h3>
-              <p className="ml-4">Author: {data.onAdd.author.name}</p>
-            </div>
-          </div>
-        )}
+        <div>
+          Navigate to{" "}
+          <a
+            className="text-blue-400 underline"
+            href="http://localhost:5287/graphql"
+          >
+            this link
+          </a>{" "}
+          to view subscriptions
+        </div>
       </div>
     </div>
   );
+  //   const { loading, error, data } = useSubscription(MESSAGE_SUBSCRIPTION);
+
+  //   if (error) return <p>Error {error.message}</p>;
+
+  //   return (
+  //     <div className="flex flex-col">
+  //       <Navbar />
+  //       <div className="p-5">
+  //         <h1 className="mb-5">Subscribed Posts</h1>
+  //         {loading && <p>Loading...</p>}
+  //         {data && (
+  //           <div className="flex flex-col">
+  //             <div className="mb-2 border-b border-dashed w-96">
+  //               <h3 className="">{data.onMessageReceived}</h3>
+  //             </div>
+  //           </div>
+  //         )}
+  //       </div>
+  //     </div>
+  //   );
 };
 
 export default Page;

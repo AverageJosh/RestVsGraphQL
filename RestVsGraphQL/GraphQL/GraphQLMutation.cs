@@ -19,7 +19,10 @@ namespace RestVsGraphQL.GraphQL
             };
 
             postData.AddPost(newPost);
-            await eventSender.SendAsync(nameof(AddPost), newPost);
+			
+            await eventSender.SendAsync(nameof(GraphQLSubscription.OnMessageReceived), $"{newPost.Title} has been added!");
+
+            await eventSender.SendAsync(nameof(GraphQLSubscription.OnAdd), newPost);
 
             return newPost;
         }

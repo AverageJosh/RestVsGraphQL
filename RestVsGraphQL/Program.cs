@@ -10,6 +10,7 @@ builder.Services
 	.AddInMemorySubscriptions()
 	.AddSubscriptionType<GraphQLSubscription>()
 	.AddQueryType<GraphQLQuery>()
+		.AddTypeExtension<GraphQLQueryExtension>()
 	.AddMutationType<GraphQLMutation>()
 	.RegisterService<PostDataService>();
 
@@ -19,25 +20,26 @@ builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowAllOrigins", builder =>
 	{
-		builder.AllowAnyOrigin()
-			.AllowAnyMethod()
-			.AllowAnyHeader();
+		builder
+			.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
 	});
 });
 
 var app = builder.Build();
+
+app.UseWebSockets();
 app.UseCors("AllowAllOrigins");
 
-
-app.UseRouting().UseEndpoints(endpoints => endpoints.MapGraphQL());
+app.UseRouting();
+app.MapGraphQL();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.MapControllers();
 
-app.UseWebSockets();
 
 using (var scope = app.Services.CreateScope())
 {

@@ -3,8 +3,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import Navbar from "../navbar";
-
-// Define the structure of the GraphQL response
+import Link from "next/link";
 interface Author {
   name: string;
 }
@@ -32,7 +31,6 @@ const GET_POSTS = gql`
 `;
 
 const Page: React.FC = () => {
-  // Use the useQuery hook and ensure data type safety
   const { loading, error, data } = useQuery<GetPostsData>(GET_POSTS, {
     pollInterval: 5000,
   });
@@ -48,7 +46,15 @@ const Page: React.FC = () => {
         <div className="flex flex-col">
           {data?.posts.map((post) => (
             <div key={post.id} className="mb-2 border-b border-dashed w-96">
-              <h3 className="">{post.title}</h3>
+              <Link
+                className="underline text-blue-400"
+                href={{
+                  pathname: "/posts/graphql/book",
+                  query: { id: post.id },
+                }}
+              >
+                <h3>{post.title}</h3>
+              </Link>
               <p className="ml-4">Author: {post.author.name}</p>
             </div>
           ))}

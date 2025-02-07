@@ -5,10 +5,12 @@ namespace RestVsGraphQL.GraphQL
 	public class GraphQLSubscription
 	{
 		[Subscribe]
-		[Topic(nameof(GraphQLMutation.AddPost))]
 		public Post OnAdd([EventMessage] Post post)
 		{
 			return post;
 		}
-	}
+
+        [Subscribe]
+        public string OnMessageReceived([EventMessage] string message) => message;
+    }
 }
