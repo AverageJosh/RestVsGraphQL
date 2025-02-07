@@ -6,7 +6,9 @@ const Home: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <h1>Welcome to the GraphQL Next.js App with TypeScript!</h1>
+      <div className="p-5">
+        <h1>Welcome to the GraphQL vs Rest App</h1>
+      </div>
     </div>
   );
 };

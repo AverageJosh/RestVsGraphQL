@@ -1,34 +1,52 @@
 using RestVsGraphQL.Data;
+using RestVsGraphQL.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services
 	.AddGraphQLServer()
-	.AddQueryType<GraphQLQuery>();
+	.AddMutationConventions(true)
+	.AddInMemorySubscriptions()
+	.AddSubscriptionType<GraphQLSubscription>()
+	.AddQueryType<GraphQLQuery>()
+		.AddTypeExtension<GraphQLQueryExtension>()
+	.AddMutationType<GraphQLMutation>()
+	.RegisterService<PostDataService>();
 
-builder.Services.AddScoped<PostData>();
+builder.Services.AddScoped<PostDataService>();
 
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowAllOrigins", builder =>
 	{
-		builder.AllowAnyOrigin()
-			.AllowAnyMethod()
-			.AllowAnyHeader();
+		builder
+			.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
 	});
 });
 
 var app = builder.Build();
+
+app.UseWebSockets();
 app.UseCors("AllowAllOrigins");
 
-app.UseRouting().UseEndpoints(endpoints => endpoints.MapGraphQL());
+app.UseRouting();
+app.MapGraphQL();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.MapControllers();
+
+
+using (var scope = app.Services.CreateScope())
+{
+	var data = scope.ServiceProvider.GetService<PostDataService>();
+
+	data?.Load();
+}
 
 
 app.Run();
