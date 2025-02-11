@@ -1,4 +1,6 @@
-﻿using Models;
+﻿using HotChocolate;
+using HotChocolate.Types;
+using Models;
 
 namespace RestVsGraphQL.GraphQL
 {

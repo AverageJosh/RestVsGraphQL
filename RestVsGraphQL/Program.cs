@@ -12,7 +12,8 @@ builder.Services
 	.AddQueryType<GraphQLQuery>()
 		.AddTypeExtension<GraphQLQueryExtension>()
 	.AddMutationType<GraphQLMutation>()
-	.RegisterService<PostDataService>();
+	.AddFiltering()
+	.AddSorting();
 
 builder.Services.AddScoped<PostDataService>();
 

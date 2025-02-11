@@ -12,8 +12,15 @@ namespace RestVsGraphQL.GraphQL
             _postData = postData;
         }
 
+        [UseFiltering]
+        [UseSorting]
         [GraphQLDescription("Get all posts")]
         public List<Post> GetPosts() => _postData.GetPosts();
+
+        [UsePaging]
+        [UseFiltering]
+        [GraphQLDescription("Get paginated posts")]
+        public IEnumerable<Post> GetPaginatedPosts => _postData.GetPosts();
 
         [GraphQLDescription("Get a single post by its id")]
         public Post? GetPost(int id)
