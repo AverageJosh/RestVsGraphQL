@@ -1,34 +1,11 @@
 "use client";
 
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import Navbar from "../navbar";
 import Link from "next/link";
-interface Author {
-  name: string;
-}
-
-interface Post {
-  id: string;
-  title: string;
-  author: Author;
-}
-
-interface GetPostsData {
-  posts: Post[];
-}
-
-const GET_POSTS = gql`
-  query GetPosts {
-    posts {
-      id
-      title
-      author {
-        name
-      }
-    }
-  }
-`;
+import { GET_POSTS } from "./queries";
+import type { GetPostsData } from "./types";
 
 const Page: React.FC = () => {
   const { loading, error, data } = useQuery<GetPostsData>(GET_POSTS, {

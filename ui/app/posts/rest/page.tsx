@@ -22,7 +22,7 @@ const PostsREST: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:5287/api/post/get", {
+        const response = await fetch("https://localhost:7271/api/post/get", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -51,18 +51,23 @@ const PostsREST: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="flex flex-col">
+    <div className="bg-gray-200 min-h-screen py-6">
       <Navbar />
-      <div className="p-5">
-        <h1 className="mb-5">Posts</h1>
-        <div className="flex flex-col">
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4 text-black">Rest Posts</h1>
+        <ul className="list-none space-y-2">
           {posts.map((post) => (
-            <div key={post.id} className="mb-2 border-b border-dashed w-96">
-              <h3 className="">{post.title}</h3>
-              <p className="ml-4">Author: {post.author.name}</p>
-            </div>
+            <li
+              key={post.id}
+              className="bg-white rounded-md shadow-md p-4 hover:shadow-lg transition duration-300"
+            >
+              <h3 className="text-lg font-semibold underline text-blue-800">
+                {post.title}
+              </h3>
+              <p className="text-gray-600">Author: {post.author.name}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );
