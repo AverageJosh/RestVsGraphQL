@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="flex gap-x-5 py-5 border-b-2 border-black">
+    <div className="flex gap-x-5 py-5 bg-blue-800 text-white">
       <CustomLink href="/">Home</CustomLink>
       <CustomLink href="/posts/graphql">GraphQL Posts</CustomLink>
       <CustomLink href="/posts/graphql/add">Add GraphQL Posts</CustomLink>
@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 
 const CustomLink = ({ href, children }: { href: string; children: string }) => {
   return (
-    <Link className="p-3 hover:bg-slate-400" href={href}>
+    <Link className="p-3 hover:bg-blue-200 rounded-md text-white" href={href}>
       {children}
     </Link>
   );

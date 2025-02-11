@@ -1,6 +1,5 @@
 "use client";
 
-// pages/addPost.tsx
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import Navbar from "../../navbar";
@@ -73,44 +72,51 @@ const AddPost: React.FC = () => {
   if (loading) return <p>Submitting...</p>;
   if (error) return <p>Error :( {error}</p>;
 
-  console.log(data);
   return (
-    <div className="flex flex-col">
+    <div className="bg-gray-200 min-h-screen py-6">
       <Navbar />
-      <h2>Add New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-y-3 w-1/2">
-          <input
-            className="text-black pl-1"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Post title"
-            required
-          />
-          <input
-            className="text-black pl-1"
-            type="text"
-            value={authorName}
-            onChange={(e) => setAuthorName(e.target.value)}
-            placeholder="Author name"
-            required
-          />
-          <button className="hover:bg-slate-400" type="submit">
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4 text-black">Add New Post</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Post title"
+              required
+            />
+          </div>
+          <div>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              placeholder="Author name"
+              required
+            />
+          </div>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
             Add Post
           </button>
-        </div>
-      </form>
-
-      {error && <p>Error: {error}</p>}
-      {success && <p>Post successfully created!</p>}
-      {data && (
-        <div>
-          <h3>New Post Added</h3>
-          <p>Title: {data.addPost.post.title}</p>
-          <p>Author: {data.addPost.post.author.name}</p>
-        </div>
-      )}
+          {error && <p className="text-red-500">Error: {error}</p>}
+          {success && (
+            <p className="text-green-500">Post successfully created!</p>
+          )}
+        </form>
+        {data && (
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold">New Post Added</h3>
+            <p>Title: {data.addPost.post.title}</p>
+            <p>Author: {data.addPost.post.author.name}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
