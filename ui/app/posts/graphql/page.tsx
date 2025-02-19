@@ -16,7 +16,7 @@ const Page: React.FC = () => {
   if (error) return <p>Error {error.message}</p>;
 
   return (
-    <div className="bg-gray-200 min-h-screen py-6">
+    <div className="bg-gray-200 min-h-screen">
       <Navbar />
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4 text-black">GraphQL Posts</h1>
@@ -24,7 +24,7 @@ const Page: React.FC = () => {
           {data?.posts.map((post) => (
             <li
               key={post.id}
-              className="bg-white rounded-md shadow-md p-4 hover:shadow-lg transition duration-300"
+              className="bg-white rounded-md shadow-md p-4 hover:shadow-2xl transition duration-300"
             >
               <Link
                 href={{

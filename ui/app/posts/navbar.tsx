@@ -1,6 +1,5 @@
 // components/Navbar.tsx
 import React from "react";
-import Link from "next/link";
 
 const Navbar: React.FC = () => {
   return (
@@ -10,16 +9,16 @@ const Navbar: React.FC = () => {
       <CustomLink href="/posts/graphql/add">Add GraphQL Posts</CustomLink>
       <CustomLink href="/posts/graphql/subscribe">GraphQL Subscribe</CustomLink>
       <CustomLink href="/posts/rest">Rest Posts</CustomLink>
-      <CustomLink href="/posts/schema">Rest Schema</CustomLink>
+      <CustomLink href="/posts/schema">GraphQL Schema</CustomLink>
     </div>
   );
 };
 
 const CustomLink = ({ href, children }: { href: string; children: string }) => {
   return (
-    <Link className="p-3 hover:bg-blue-200 rounded-md text-white" href={href}>
+    <a className="p-3 hover:bg-blue-200 rounded-md text-white" href={href}>
       {children}
-    </Link>
+    </a>
   );
 };
 

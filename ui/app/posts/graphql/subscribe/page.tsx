@@ -37,7 +37,7 @@ const Page: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="bg-gray-200 flex flex-col">
       <Navbar />
       <div className="p-5">
         <h1 className="mb-5">Subscribed Posts</h1>

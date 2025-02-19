@@ -51,7 +51,7 @@ const PostsREST: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="bg-gray-200 min-h-screen py-6">
+    <div className="bg-gray-200 min-h-screen">
       <Navbar />
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4 text-black">Rest Posts</h1>

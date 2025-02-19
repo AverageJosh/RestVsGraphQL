@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray-500">
         <Provider>
-          <div className="p-5">{children}</div>
+          <div>{children}</div>
         </Provider>
       </body>
     </html>
