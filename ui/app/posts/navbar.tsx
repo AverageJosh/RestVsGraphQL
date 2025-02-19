@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
       <CustomLink href="/posts/graphql/add">Add GraphQL Posts</CustomLink>
       <CustomLink href="/posts/graphql/subscribe">GraphQL Subscribe</CustomLink>
       <CustomLink href="/posts/rest">Rest Posts</CustomLink>
+      <CustomLink href="/posts/schema">Rest Schema</CustomLink>
     </div>
   );
 };
